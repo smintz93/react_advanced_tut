@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
-import Nav from './Nav';
 import Link from 'next/link';
 import styled from 'styled-components';
+import Nav from './Nav';
+import Router from 'next/router';
+import NProgress from 'nprogress';
+
+Router.onRouteChangeStart = () => {
+  // console.log('onRouteChange Start Triggered')
+  NProgress.start();
+};
+Router.onRouteChangeComplete = () => {
+  // console.log('onRouteChange Complete Triggered')
+  NProgress.done();
+};
+Router.onRouteChangeError = () => {
+  // console.log('onRouteChange Error Triggered')
+  NProgress.done();
+};
 
 const Logo = styled.h1`
   font-size: 4rem;
@@ -37,7 +52,7 @@ const StyledHeader = styled.header`
   .sub-bar {
     display: grid;
     grid-template-columns: 1fr auto;
-    border-bottom: 1px solid ${props => props.theme.lightGrey};
+    border-bottom: 1px solid ${props => props.theme.lightgrey};
   }
 `;
 
