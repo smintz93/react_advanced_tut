@@ -16,13 +16,13 @@ class MyApp extends App {
      return { pageProps };
   }
   render() {
-    const { Component, apollo } = this.props;
+    const { Component, apollo, pageProps } = this.props;
     // Component in this case is whatever component you are trying to render 
     return (
       <Container>
         <ApolloProvider client={apollo}>
           <Page>
-            <Component />
+            <Component {...pageProps} />
           </Page>
         </ApolloProvider>
       </Container>
