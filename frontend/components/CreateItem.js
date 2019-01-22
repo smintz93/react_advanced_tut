@@ -4,6 +4,27 @@ import gql from 'graphql-tag';
 import Form from './styles/Form';
 import formatMoney from '../lib/formatMoney'
 
+const CREATE_ITEM_MUTATION = gql`
+  mutation CREATE_ITEM_MUTATION(
+    $title: String!
+    $description: String!
+    $price: Int!
+    $image: String
+    $largeImage: String
+  ) {
+    createItem(
+      title: $title
+      description: $description
+      price: $price
+      image: $image
+      largeImage: $largeImage
+    ) {
+      id
+    }
+  }
+`;
+
+
 class CreateItem extends Component {
   state = {
     title: '',
@@ -21,7 +42,10 @@ class CreateItem extends Component {
 
   render() {
     return (
-      <Form>
+      <Form onSubmit={(e) => {
+        e.preventDefault();
+        console.log(this.state);
+      }}>
         <fieldset>
           <label htmlFor="title">
             Title
@@ -48,6 +72,19 @@ class CreateItem extends Component {
               onChange={this.handleChange}
             />
           </label>
+
+          <label htmlFor="description">
+            Description
+                <textarea
+              id="description"
+              name="description"
+              placeholder="Enter a Description"
+              required
+              value={this.state.description}
+              onChange={this.handleChange}
+            />
+          </label>
+          <button type="submit">Submit</button>
         </fieldset>
         <h2>Sell an Item.</h2>
       </Form>
@@ -56,3 +93,4 @@ class CreateItem extends Component {
 }
 
 export default CreateItem;
+export { CREATE_ITEM_MUTATION };
