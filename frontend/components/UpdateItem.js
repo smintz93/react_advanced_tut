@@ -68,7 +68,7 @@ class UpdateItem extends Component {
       >
         {({ data, loading }) => {
           if (loading) return <p>Loading...</p>;
-          if(!data.item) return <p>No Item Found for ID</p>;
+          if(!data.item) return <p>No Item Found for ID </p>;
           return (
             <Mutation mutation={UPDATE_ITEM_MUTATION} variables={this.state}>
               {(updateItem, { loading, error }) => (
